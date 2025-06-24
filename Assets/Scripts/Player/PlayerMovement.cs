@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -80f, 90f); // Clamp the vertical rotation to prevent flipping
         playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f); // Apply the vertical rotation to the camera
 
-        playerBody.Rotate(Vector3.up * MouseX * Time.deltaTime * mouseSensitivity); // Rotate the player body based on mouse X input
+        playerBody.Rotate(Vector3.up * +MouseX * Time.deltaTime * mouseSensitivity); // Rotate the player body based on mouse X input
 
         Vector3 moveDirection = playerBody.forward * MoveValue.y + playerBody.right * MoveValue.x; // Calculate the movement direction based on input
         characterController.Move(moveDirection * Time.deltaTime * 5f); // Move the character controller in the calculated direction
