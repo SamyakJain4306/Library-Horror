@@ -2,18 +2,24 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
-    InputSystem_Actions inputActions; // Reference to the input actions class
+    InputSystem_Actions inputActions;
 
     public Transform playerBody;
-    public Camera playerCamera; // Reference to the player's camera
-    public float mouseSensitivity = 100f; // Sensitivity for mouse movement
-    public CharacterController characterController; // Reference to the CharacterController components
-    float xRotation = 0f; // Variable to store the vertical rotation of the player
+    public Camera playerCamera;
+    public float mouseSensitivity = 100f;
+    public Transform groundCheck;
+    public CharacterController characterController; 
+    float xRotation = 0f;
+    bool isGrounded = false;
+    public LayerMask groundMask;
+    public float gravity = -9.81f;
+    Vector3 downVelocity;
+
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
-        inputActions = new InputSystem_Actions(); // Initialize the input actions
-        inputActions.Player.Enable(); // Enable the input actions to start receiving input events
+        Cursor.lockState = CursorLockMode.Locked; 
+        inputActions = new InputSystem_Actions(); 
+        inputActions.Player.Enable();
     }
 
     void Update()
@@ -29,8 +35,16 @@ public class PlayerMovement : MonoBehaviour
         playerBody.Rotate(Vector3.up * MouseX * Time.deltaTime * mouseSensitivity); // Rotate the player body based on mouse X input
 
         Vector3 moveDirection = playerBody.forward * MoveValue.y + playerBody.right * MoveValue.x; // Calculate the movement direction based on input
-
         characterController.Move(moveDirection * Time.deltaTime * 5f); // Move the character controller in the calculated direction
 
+        isGrounded = Physics.CheckSphere(groundCheck.position, 0.5f, groundMask);
+        
+
+        if (isGrounded && downVelocity.y < 0)
+        {
+            downVelocity.y = -.02f; // Reset the downward velocity when grounded
+        }
+        downVelocity.y += gravity * Time.deltaTime*Time.deltaTime; 
+        characterController.Move(downVelocity);
     }
 }
