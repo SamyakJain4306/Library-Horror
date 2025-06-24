@@ -14,6 +14,5 @@ public class PlayerAnimController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        speed = player.transform
     }
 }
