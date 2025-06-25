@@ -16,6 +16,7 @@ public class PlayerAnimController : MonoBehaviour
     void Update()
     {
         Vector3 currentPosition = player.transform.position; // Get the current position of the player
+        currentPosition.y = 0; // Ignore vertical position for speed calculation
         speed = Vector3.Distance(currentPosition, lastPosition) / Time.deltaTime; // Calculate speed based on distance traveled since last frame
         lastPosition = currentPosition; // Update last position for next frame
         animator = player.GetComponent<Animator>(); // Get the Animator component from the player GameObject
