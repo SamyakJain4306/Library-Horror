@@ -180,7 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBody: {fileID: 8859234168851480087}
   playerCamera: {fileID: 2134718031396148073}
-  mouseSensitivity: -7.87
+  mouseSensitivity: 7.87
   groundCheck: {fileID: 126823430432835255}
   characterController: {fileID: 2935492881702638388}
   groundMask:
