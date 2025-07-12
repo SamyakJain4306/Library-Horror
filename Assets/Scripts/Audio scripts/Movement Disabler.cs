@@ -9,7 +9,7 @@ public class MovementDisabler : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(EnableMovementAfterDelay(29f));
+        StartCoroutine(EnableMovementAfterDelay(22f));
     }
 
     IEnumerator EnableMovementAfterDelay(float delay)
